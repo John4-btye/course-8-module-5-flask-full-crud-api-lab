@@ -147,16 +147,20 @@ Test your endpoints using Postman or curl:
 ## Considerations
 
 **1. Input Validation**
+
 - Ensure the `title` field is provided.
 - Return a `400 Bad Request` if missing.
 
 **2. Event Not Found**
+
 - Return `404 Not Found` with a clear message when the event ID doesn't exist.
 
 **3. Reusable Logic**
+
 - Consider writing a helper function to look up events by ID.
 
 **4. Scalability**
+
 - While using a single file works here, separate concerns into modules as your API grows.
 
 ---
@@ -168,6 +172,222 @@ After completing this lab, you will:
 ✅ Know how to handle incoming JSON with Flask  
 ✅ Build routes that implement full CRUD behavior  
 ✅ Simulate persistent resource changes in memory  
-✅ Return proper HTTP status codes and structured responses  
+✅ Return proper HTTP status codes and structured responses
 
 This is a critical step in your backend developer journey. Next up: persistent databases!
+
+# Event Management API
+
+## 📌 Overview
+
+This project is a simple RESTful API built with Flask that allows users to create, update, retrieve, and delete events. It simulates a backend service using an in-memory data store and demonstrates core CRUD operations, JSON handling, and proper HTTP response usage.
+
+This application is designed as a foundational backend project to reinforce API design principles and Flask development.
+
+---
+
+## 🚀 Features
+
+- Create new events via `POST /events`
+- Retrieve all events via `GET /events`
+- Update event titles via `PATCH /events/<id>`
+- Delete events via `DELETE /events/<id>`
+- Welcome route at `/` returning a JSON message
+- Input validation and error handling
+- Proper HTTP status codes for all operations
+
+---
+
+## 🛠️ Technologies Used
+
+- Python 3
+- Flask
+- JSON (for request/response handling)
+
+---
+
+## 📂 Project Structure
+
+```
+.
+├── app.py
+├── tests/
+│   └── test_app.py
+├── pytest.ini
+└── README.md
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+1. Clone the repository:
+
+```bash
+git clone <your-repo-url>
+cd <your-project-folder>
+```
+
+2. (Optional) Create a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+3. Install dependencies:
+
+```bash
+pip install flask pytest
+```
+
+---
+
+## ▶️ Running the Application
+
+Start the Flask development server:
+
+```bash
+python3 app.py
+```
+
+Server will run at:
+
+```
+http://localhost:5000
+```
+
+---
+
+## 🧪 Running Tests
+
+Run pytest to verify functionality:
+
+```bash
+pytest
+```
+
+Expected result:
+
+```
+5 passed
+```
+
+---
+
+## 📡 API Endpoints
+
+### 🔹 GET /
+
+Returns a welcome message.
+
+**Response:**
+
+```json
+{
+  "message": "Welcome to the Events API!"
+}
+```
+
+---
+
+### 🔹 GET /events
+
+Returns all events.
+
+**Response:**
+
+```json
+[
+  { "id": 1, "title": "Tech Meetup" },
+  { "id": 2, "title": "Python Workshop" }
+]
+```
+
+---
+
+### 🔹 POST /events
+
+Creates a new event.
+
+**Request Body:**
+
+```json
+{
+  "title": "Hackathon"
+}
+```
+
+**Response:**
+
+- `201 Created`
+
+```json
+{
+  "id": 3,
+  "title": "Hackathon"
+}
+```
+
+---
+
+### 🔹 PATCH /events/<id>
+
+Updates an existing event.
+
+**Request Body:**
+
+```json
+{
+  "title": "Updated Event"
+}
+```
+
+**Responses:**
+
+- `200 OK` – Success
+- `404 Not Found` – Event does not exist
+
+---
+
+### 🔹 DELETE /events/<id>
+
+Deletes an event.
+
+**Responses:**
+
+- `204 No Content` – Successfully deleted
+- `404 Not Found` – Event does not exist
+
+---
+
+## ⚠️ Error Handling
+
+The API returns structured error responses:
+
+```json
+{
+  "error": "Message describing the issue"
+}
+```
+
+Common cases:
+
+- Missing `title`
+- Invalid JSON input
+- Event not found
+
+---
+
+## 🏁 Conclusion
+
+This project demonstrates a strong understanding of:
+
+- REST API design
+- Flask routing and request handling
+- JSON validation and error handling
+- Test-driven development using pytest
+
+It serves as a solid foundation for building more advanced backend systems.
+
+---
